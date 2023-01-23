@@ -8,7 +8,17 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		// include the <div id="svelte"> element in src/app.html
+		target: '#svelte',
+		vite: {
+			server: {
+				hmr: {
+					clientPort: process.env.HMR_HOST ? 443 : 5173,
+					host: process.env.HMR_HOST ? process.env.HMR_HOST.substring("https://".length) : "localhost"
+				}
+			}
+		}
 	}
 };
 
